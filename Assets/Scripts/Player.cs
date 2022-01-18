@@ -1,44 +1,48 @@
 using System;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class Player : Entity
 {
     private const float RAY_DISTANCE = 1000;
-
-    private ActionManager m_actionManager = null;
-    private Animator m_animator = null;
 
     private Movement m_movement = null;
     private Attack m_attack = null;
     private Death m_death= null;
 
-    private void Awake()
+    protected override void Awake()
     {
-        m_actionManager = GetComponent<ActionManager>();
-        m_animator = GetComponent<Animator>();
+        base.Awake();
 
         m_attack = GetComponent<Attack>();
         m_movement = GetComponent<Movement>();
         m_death = GetComponent<Death>();
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         m_attack.Initialize(m_animator, m_actionManager);
         m_movement.Initialize(m_animator, m_actionManager);
         m_death.Initialize(m_animator, m_actionManager);
+
+        InputManager.Instance.OnInput = OnInput;
     }
 
     private void Update()
     {
-        UpdateInput();
+        if (m_death.IsDead)
+        {
+            InputManager.Instance.OnInput = null;
+            return;
+        }
     }
 
-    private void UpdateInput()
+    public void OnInput(EInputType _action, Vector2 _inputPosition)
     {
-        Ray ray = GetScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(_inputPosition);
 
-        if (Input.GetMouseButton(0))
+        if (_action == EInputType.Began)
         {
             RaycastHit[] hits = Physics.RaycastAll(ray, RAY_DISTANCE);
             float[] distances = new float[hits.Length];
@@ -49,8 +53,8 @@ public class PlayerController : MonoBehaviour
                 IDamageable target = hit.transform.GetComponent<IDamageable>();
                 if (target != null && !target.IsDead)
                 {
-                    if (target.GetTransform() != transform)
-                        m_attack.SetTarget(target);
+                    if (target.Transform != transform)
+                        m_attack.SetTargetAndChangeAction(target);
                     return;
                 }
             }
@@ -58,13 +62,13 @@ public class PlayerController : MonoBehaviour
             bool isHit = Physics.Raycast(ray, out RaycastHit outHit, RAY_DISTANCE);
             if (isHit)
             {
-                m_movement.SetDestination(outHit.point);
+                m_movement.SetDestinationAndChangeAction(outHit.point);
             }
         }
     }
 
-    private Ray GetScreenPointToRay(Vector3 _position)
+    public void CancelCurrentAction()
     {
-        return Camera.main.ScreenPointToRay(_position);
+        m_actionManager.CancelAction();
     }
 }

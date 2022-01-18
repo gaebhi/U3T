@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class Death : MonoBehaviour, IDamageable, IAction
 {
+    public Transform Transform
+    {
+        get { return transform; }
+    }
+
     private const string STR_TRIGGER = "die";
 
     public bool IsDead 
@@ -38,11 +43,6 @@ public class Death : MonoBehaviour, IDamageable, IAction
             m_animator.SetTrigger(STR_TRIGGER);
             m_actionManager.CancelAction();
         }
-    }
-
-    public Transform GetTransform()
-    {
-        return transform;
     }
 
     public void Cancel()

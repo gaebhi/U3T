@@ -6,5 +6,5 @@ public interface IDamageable
 {
     bool IsDead { get; }
     void TakeDamage(float _damage);
-    Transform GetTransform();
+    Transform Transform { get; }
 }

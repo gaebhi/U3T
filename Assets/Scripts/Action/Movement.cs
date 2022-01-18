@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Movement : MonoBehaviour, IAction
 {
+    [SerializeField] private float m_maxSpeed = 5f;
+
     private const string STR_SPEED = "speed";
 
     private ActionManager m_actionManager = null;
@@ -30,11 +32,18 @@ public class Movement : MonoBehaviour, IAction
     }
 
 
-    public void SetDestination(Vector3 _destination, bool _isChangeAction = true)
+    public void SetDestinationAndChangeAction(Vector3 _destination, float _speedMulti = 1f)
     {
-        if (_isChangeAction)
-            m_actionManager.ChangeAction(this);
+        m_actionManager.ChangeAction(this);
         m_agent.isStopped = false;
+        m_agent.speed = m_maxSpeed * Mathf.Clamp01(_speedMulti);
+        m_agent.destination = _destination;
+    }
+
+    public void SetDestination(Vector3 _destination, float _speedMulti = 1f)
+    {
+        m_agent.isStopped = false;
+        m_agent.speed = m_maxSpeed * Mathf.Clamp01(_speedMulti);
         m_agent.destination = _destination;
     }
 

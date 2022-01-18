@@ -6,6 +6,7 @@ public class Attack : MonoBehaviour, IAction
 {
     private const string STR_TRIGGER = "attack";
     private const string STR_STOP_TRIGGER = "stopAttack";
+
     [SerializeField] private float m_attackRange = 2f;
     [SerializeField] private float m_coolTime = 1.5f;
 
@@ -31,9 +32,9 @@ public class Attack : MonoBehaviour, IAction
         if (m_target == null)
             return;
 
-        if (!InRange())
+        if (!MathUtil.InRange(transform.position, m_targetPositon, m_attackRange) && m_elapsedTime > m_coolTime)
         {
-            GetComponent<Movement>().SetDestination(m_target.transform.position, false);
+            GetComponent<Movement>().SetDestination(m_target.transform.position);
         }
         else
         {
@@ -44,15 +45,10 @@ public class Attack : MonoBehaviour, IAction
         }
     }
 
-    private bool InRange()
-    {
-        return Vector3.Distance(transform.position, m_targetPositon) < m_attackRange;
-    }
-
-    public void SetTarget(IDamageable _damageable)
+    public void SetTargetAndChangeAction(IDamageable _damageable)
     {
         m_actionManager.ChangeAction(this);
-        m_target = _damageable.GetTransform();
+        m_target = _damageable.Transform;
         m_targetPositon = m_target.position;
         m_targetPositon.y = 0f;
     }
