@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void Play(Transform _target)
+    public void Play2(Transform _target)
     {
         m_isPlay = true;
 
@@ -84,5 +84,61 @@ public class CameraController : MonoBehaviour
                 InputManager.Instance.OnInput = m_player.GetComponent<Player>().OnInput;
                 m_isPlay = false;
             });
+    }
+
+    public void Play(Transform _target)
+    {
+        m_isPlay = true;
+
+        InputManager.Instance.OnInput = null;
+        m_player.GetComponent<Player>().CancelCurrentAction();
+
+        Sequence mySequence = DOTween.Sequence();
+
+        Vector3 position = Vector3.zero;
+        Vector3 angle = Vector3.zero;
+
+        angle.x = 25f;
+
+        position = _target.position;
+        position.y = 5f;
+        position.z -= 12f;
+
+        transform.DOMove(position, DURATION).OnStart(() => { transform.DORotate(angle, DURATION); }).OnComplete(() => {
+            angle.y = 100f;
+
+            position = _target.position;
+            position.y = 5f;
+            position.x -= 12f;
+
+            transform.DOMove(position, DURATION).OnStart(() => { transform.DORotate(angle, DURATION); }).OnComplete(() => {
+                angle.y = 190f;
+
+                position = _target.position;
+                position.y = 5f;
+                position.z += 12f;
+
+                transform.DOMove(position, DURATION).OnStart(() => { transform.DORotate(angle, DURATION); }).OnComplete(() => {
+                    angle.y = 280f;
+
+                    position = _target.position;
+                    position.y = 5f;
+                    position.x += 12f;
+
+                    transform.DOMove(position, DURATION).OnStart(() => { transform.DORotate(angle, DURATION); }).OnComplete(() => {
+
+                        transform.DOMove(m_player.position + m_initialPosition, DURATION).OnStart(() => { transform.DORotate(m_initialAngle, DURATION); }).OnComplete(() => {
+
+                            m_dayNight.ChangeDay();
+                            InputManager.Instance.OnInput = m_player.GetComponent<Player>().OnInput;
+                            m_isPlay = false;
+
+                        });
+                    });
+                });
+            });
+        });
+
+
     }
 }

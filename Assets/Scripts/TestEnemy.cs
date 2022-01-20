@@ -6,7 +6,8 @@ public class TestEnemy : Entity
 {
     [SerializeField] private PatrolPath m_path = null;
     [SerializeField, Range(0, 1)] private float m_speedMulti = 0.2f;
-    private const float CHASE_RANGE = 6f;
+
+    private const float CHASE_RANGE = 8f;
     private const float WAYPOINT_RANGE = 1f;
     private const float WAIT_TIME = 2f;
 

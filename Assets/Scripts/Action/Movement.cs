@@ -31,7 +31,6 @@ public class Movement : MonoBehaviour, IAction
         UpdateAnimation();
     }
 
-
     public void SetDestinationAndChangeAction(Vector3 _destination, float _speedMulti = 1f)
     {
         m_actionManager.ChangeAction(this);

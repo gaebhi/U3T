@@ -9,9 +9,12 @@ public class Attack : MonoBehaviour, IAction
 
     [SerializeField] private float m_attackRange = 2f;
     [SerializeField] private float m_coolTime = 1.5f;
-    [SerializeField] private float m_weaponDamage = 10f;
-    [SerializeField] private GameObject m_weaponPrefab = null;
-    [SerializeField] private Transform m_handTransform = null;
+    [SerializeField] private float m_damage = 10f;
+
+    [SerializeField] private Transform m_rightHandTransform = null;
+    [SerializeField] private Transform m_leftHandTransform = null;
+
+    [SerializeField] private Weapon m_weapon = null;
 
     private Transform m_target = null;
     private Vector3 m_targetPositon = Vector3.zero;
@@ -26,6 +29,9 @@ public class Attack : MonoBehaviour, IAction
         m_elapsedTime = 0f;
         m_animator = _animator;
         m_actionManager = _actionManager;
+
+        if (m_weapon != null)
+            EquipWeapon(m_weapon);
     }
 
     private void Update()
@@ -46,6 +52,15 @@ public class Attack : MonoBehaviour, IAction
             GetComponent<Movement>().Cancel();
             AttackTrigger();
         }
+    }
+
+    public void EquipWeapon(Weapon _weapon)
+    {
+        m_weapon = _weapon;
+        m_weapon.EquipWeapon(m_rightHandTransform, m_leftHandTransform, m_animator);
+        m_coolTime = m_weapon.CoolTime;
+        m_attackRange = m_weapon.Range;
+        m_damage = m_weapon.Damage;
     }
 
     public void SetTargetAndChangeAction(IDamageable _damageable)
@@ -79,7 +94,17 @@ public class Attack : MonoBehaviour, IAction
     //aimation event
     private void Hit()
     {
-        if(m_target != null)
-            m_target.GetComponent<Death>().TakeDamage(50f);
+        if (m_target == null)
+            return;
+
+        if (m_weapon !=null && m_weapon.HasProjectile())
+            m_weapon.ShootProjectile(m_rightHandTransform, m_leftHandTransform, m_target.GetComponent<Death>());
+        else
+            m_target.GetComponent<Death>().TakeDamage(m_damage);
+    }
+
+    public void Shoot()
+    {
+        Hit();
     }
 }
