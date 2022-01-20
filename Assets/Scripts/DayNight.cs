@@ -12,7 +12,7 @@ public class DayNightEditor : Editor
         DayNight dayNight = (DayNight)target;
         if (GUILayout.Button("Change"))
         {
-            dayNight.SetDay();
+            dayNight.ChangeDay();
         }
 
     }
@@ -21,7 +21,7 @@ public class DayNight : MonoBehaviour
 {
     private Light m_directionalLight = null;
     private const float CONST_24OURS = 24f;
-    [SerializeField] private Gradient m_ambientColor;
+    
     [SerializeField] private Gradient m_directionalColor;
     [SerializeField] private Gradient m_fogColor;
     [SerializeField, Range(0, 24)] private float m_time = 0f;
@@ -32,7 +32,7 @@ public class DayNight : MonoBehaviour
     }
     
     
-    public void SetDay(float _duration = 3f)
+    public void ChangeDay(float _duration = 3f)
     {
         DOVirtual.Float(m_time, m_time + CONST_24OURS*0.5f, _duration, (float _value) => { m_time = _value%CONST_24OURS; });
     }
@@ -44,8 +44,6 @@ public class DayNight : MonoBehaviour
 
     private void UpdateLighting(float _value)
     {
-
-        RenderSettings.ambientLight = m_ambientColor.Evaluate(_value);
         RenderSettings.fogColor = m_fogColor.Evaluate(_value);
 
         if (m_directionalLight != null)

@@ -3,6 +3,8 @@ using DG.Tweening;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] private DayNight m_dayNight = null;
+
     private const float DURATION = 2f;
 
     private bool m_isPlay = false;
@@ -39,7 +41,7 @@ public class CameraController : MonoBehaviour
         Vector3 position = Vector3.zero;
         Vector3 angle = Vector3.zero;
 
-        angle.x = 15f;
+        angle.x = 25f;
 
         position = _target.position;
         position.y = 3f;
@@ -78,6 +80,7 @@ public class CameraController : MonoBehaviour
         mySequence.Insert(4f * DURATION, transform.DOMove(m_player.position + m_initialPosition, DURATION))
             .AppendCallback(() =>
             {
+                m_dayNight.ChangeDay();
                 InputManager.Instance.OnInput = m_player.GetComponent<Player>().OnInput;
                 m_isPlay = false;
             });

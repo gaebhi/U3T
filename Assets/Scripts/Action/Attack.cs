@@ -9,6 +9,9 @@ public class Attack : MonoBehaviour, IAction
 
     [SerializeField] private float m_attackRange = 2f;
     [SerializeField] private float m_coolTime = 1.5f;
+    [SerializeField] private float m_weaponDamage = 10f;
+    [SerializeField] private GameObject m_weaponPrefab = null;
+    [SerializeField] private Transform m_handTransform = null;
 
     private Transform m_target = null;
     private Vector3 m_targetPositon = Vector3.zero;

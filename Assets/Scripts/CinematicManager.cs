@@ -3,6 +3,7 @@ using UnityEngine;
 public class CinematicManager : MonoBehaviour
 {
     [SerializeField] private Transform m_transform = null;
+
     private bool m_isTriggered = false;
 
     private void Awake()
