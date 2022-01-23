@@ -22,9 +22,9 @@ public class Player : Entity
     {
         base.Start();
 
-        m_attack.Initialize(m_animator, m_actionManager);
-        m_movement.Initialize(m_animator, m_actionManager);
-        m_death.Initialize(m_animator, m_actionManager);
+        m_attack.Initialize(m_animator, m_stateMachine);
+        m_movement.Initialize(m_animator, m_stateMachine);
+        m_death.Initialize(m_animator, m_stateMachine);
 
         InputManager.Instance.OnInput = OnInput;
     }
@@ -69,6 +69,6 @@ public class Player : Entity
 
     public void CancelCurrentAction()
     {
-        m_actionManager.CancelAction();
+        m_stateMachine.CancelState();
     }
 }

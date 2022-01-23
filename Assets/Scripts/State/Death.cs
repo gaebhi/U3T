@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Death : MonoBehaviour, IDamageable, IAction
+public class Death : MonoBehaviour, IDamageable, IState
 {
     public Transform Transform
     {
@@ -19,9 +19,9 @@ public class Death : MonoBehaviour, IDamageable, IAction
     [SerializeField] private float m_maxHealth;
     private float m_currentHealth;
     private Animator m_animator;
-    private ActionManager m_actionManager;
+    private StateMachine m_actionManager;
 
-    public void Initialize(Animator _animator, ActionManager _actionManager)
+    public void Initialize(Animator _animator, StateMachine _actionManager)
     {
         m_currentHealth = m_maxHealth;
         m_isDead = false;
@@ -41,7 +41,7 @@ public class Death : MonoBehaviour, IDamageable, IAction
         {
             m_isDead = true;
             m_animator.SetTrigger(STR_TRIGGER);
-            m_actionManager.CancelAction();
+            m_actionManager.CancelState();
         }
     }
 

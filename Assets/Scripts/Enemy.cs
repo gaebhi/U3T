@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestEnemy : Entity
+public class Enemy : Entity
 {
     [SerializeField] private PatrolPath m_path = null;
     [SerializeField, Range(0, 1)] private float m_speedMulti = 0.2f;
@@ -36,9 +36,9 @@ public class TestEnemy : Entity
     {
         base.Start();
 
-        m_attack.Initialize(m_animator, m_actionManager);
-        m_movement.Initialize(m_animator, m_actionManager);
-        m_death.Initialize(m_animator, m_actionManager);
+        m_attack.Initialize(m_animator, m_stateMachine);
+        m_movement.Initialize(m_animator, m_stateMachine);
+        m_death.Initialize(m_animator, m_stateMachine);
 
         m_initPosition = transform.position;
 
@@ -76,7 +76,7 @@ public class TestEnemy : Entity
     {
         m_attack.Cancel();
         m_movement.Cancel();
-        m_actionManager.CancelAction();
+        m_stateMachine.CancelState();
     }
 
     private void AttackState()
@@ -90,7 +90,7 @@ public class TestEnemy : Entity
     {
         m_attack.Cancel();
         m_movement.Cancel();
-        m_actionManager.CancelAction();
+        m_stateMachine.CancelState();
     }
 
     private void PatrolState()

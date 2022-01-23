@@ -4308,7 +4308,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 5.96e-43, y: NaN, z: 0, w: 10.523582}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -4388,7 +4388,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.1094994e+27, y: 1.817742e+31, z: 1.8017357e+25, w: 1.9204616e+31}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -4812,14 +4812,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4580767194866877}
+  - component: {fileID: 1316981025679983}
   - component: {fileID: 95787105791313317}
   - component: {fileID: 1316981025679979}
   - component: {fileID: 1316981025679978}
-  - component: {fileID: 1316981025679981}
-  - component: {fileID: 1316981025679982}
-  - component: {fileID: 1316981025679983}
-  - component: {fileID: 1316981025679984}
   - component: {fileID: 1316981025679980}
+  - component: {fileID: 1316981025679981}
+  - component: {fileID: 1316981025679984}
+  - component: {fileID: 1316981025679982}
   m_Layer: 9
   m_Name: Character
   m_TagString: Player
@@ -4901,7 +4901,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1316981025679977}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9cda818fb59cb7488d2e5b649415151, type: 3}
+  m_Script: {fileID: 11500000, guid: 45190ddda493ae24cad8f1655cf10cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!136 &1316981025679983
@@ -7439,12 +7439,12 @@ GameObject:
   - component: {fileID: 3228823250766641352}
   - component: {fileID: 3283865140547860870}
   - component: {fileID: 3225945724571367404}
-  - component: {fileID: 3225945724571367403}
   - component: {fileID: 3225945724571367402}
   - component: {fileID: 3225945724571367401}
   - component: {fileID: 3225945724571367400}
   - component: {fileID: 3225945724571367399}
   - component: {fileID: 3225945724571367405}
+  - component: {fileID: 3225945724571367403}
   m_Layer: 9
   m_Name: Enemy_ForestWitch_01
   m_TagString: Untagged
@@ -7519,7 +7519,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3225945724571367398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9cda818fb59cb7488d2e5b649415151, type: 3}
+  m_Script: {fileID: 11500000, guid: 45190ddda493ae24cad8f1655cf10cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!136 &3225945724571367404
@@ -11964,12 +11964,12 @@ GameObject:
   - component: {fileID: 6580594098770569862}
   - component: {fileID: 6584014517736629654}
   - component: {fileID: 6584014517736629652}
-  - component: {fileID: 6584014517736629651}
   - component: {fileID: 6584014517736629650}
   - component: {fileID: 6584014517736629649}
   - component: {fileID: 6584014517736629648}
   - component: {fileID: 6584014517736629647}
   - component: {fileID: 6584014517736629653}
+  - component: {fileID: 6584014517736629651}
   m_Layer: 9
   m_Name: Enemy_BR_Slayer_01
   m_TagString: Untagged
@@ -12044,7 +12044,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6584014517736629646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9cda818fb59cb7488d2e5b649415151, type: 3}
+  m_Script: {fileID: 11500000, guid: 45190ddda493ae24cad8f1655cf10cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!195 &6584014517736629652

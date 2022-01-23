@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Movement : MonoBehaviour, IAction
+public class Movement : MonoBehaviour, IState
 {
     [SerializeField] private float m_maxSpeed = 5f;
 
     private const string STR_SPEED = "speed";
 
-    private ActionManager m_actionManager = null;
+    private StateMachine m_actionManager = null;
     private NavMeshAgent m_agent = null;
     private Animator m_animator = null;
 
     private float m_speed = 0f;
 
-    public void Initialize(Animator _animator, ActionManager _actionManager)
+    public void Initialize(Animator _animator, StateMachine _actionManager)
     {
         m_animator = _animator;
         m_actionManager = _actionManager;
@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour, IAction
 
     public void SetDestinationAndChangeAction(Vector3 _destination, float _speedMulti = 1f)
     {
-        m_actionManager.ChangeAction(this);
+        m_actionManager.ChangeState(this);
         m_agent.isStopped = false;
         m_agent.speed = m_maxSpeed * Mathf.Clamp01(_speedMulti);
         m_agent.destination = _destination;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack : MonoBehaviour, IAction
+public class Attack : MonoBehaviour, IState
 {
     private const string STR_TRIGGER = "attack";
     private const string STR_STOP_TRIGGER = "stopAttack";
@@ -20,11 +20,11 @@ public class Attack : MonoBehaviour, IAction
     private Vector3 m_targetPositon = Vector3.zero;
 
     private Animator m_animator = null;
-    private ActionManager m_actionManager = null;
+    private StateMachine m_actionManager = null;
 
     private float m_elapsedTime = 0f;
 
-    public void Initialize(Animator _animator, ActionManager _actionManager)
+    public void Initialize(Animator _animator, StateMachine _actionManager)
     {
         m_elapsedTime = 0f;
         m_animator = _animator;
@@ -65,7 +65,7 @@ public class Attack : MonoBehaviour, IAction
 
     public void SetTargetAndChangeAction(IDamageable _damageable)
     {
-        m_actionManager.ChangeAction(this);
+        m_actionManager.ChangeState(this);
         m_target = _damageable.Transform;
         m_targetPositon = m_target.position;
         m_targetPositon.y = 0f;
