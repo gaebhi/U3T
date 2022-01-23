@@ -12,4 +12,4 @@
 
 
 ## 3. 영상
-* [Video link](https://youtu.be/VVude-s0rCo "link")
+* [Video link](https://www.youtube.com/watch?v=Kc80r8Nchd4 "link")
